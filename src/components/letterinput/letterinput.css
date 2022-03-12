@@ -1,0 +1,36 @@
+.is-editing {
+  animation-name: up-down;
+  animation-duration: 2s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+p {
+  margin: 0;
+}
+
+@keyframes up-down {
+  0% {
+    transform: translateY(-3px);
+  }
+
+  25% {
+    transform: translateY(3px);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+
+  75% {
+    transform: translateY(3px);
+  }
+
+  100% {
+    transform: translateY(-3px);
+  }
+}
