@@ -4,11 +4,13 @@ import "./letterinput.css";
 
 const letterStyleState = {
   baseStyle: {
-    height: "50px",
-    width: "50px",
-    border: "3px solid black",
-    fontSize: "1.5rem",
-    textAlign: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: "37px",
+    width: "37px",
+    border: "1px solid black",
+    fontSize: "1.7rem",
     textTransform: "uppercase"
   },
   isWrong: {

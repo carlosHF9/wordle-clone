@@ -64,22 +64,28 @@ export default function AppReducer(state, action) {
       return {
         ...state,
         currentEditingCell:
-          state.currentEditingCell === state.rowLength - 1
-            ? -1
+          state.currentEditingCell === state.rowLength
+            ? state.currentEditingCell
             : state.currentEditingCell + 1
       };
 
     case "PREVIOUS_FIELD":
-      console.log('si')
+
+      
+      
       return {
         ...state,
-        currentEditingCell: state.currentEditingCell - 1
+        currentEditingCell: state.currentEditingCell === 0 ? 0 : state.currentEditingCell -1
+        
       };
 
     case "DELETE_VALUE":
-      return state.currentEditingCell === -1
+
+    
+      return state.currentEditingCell === state.rowLength
         ? {
-            ...state
+            ...state,
+            currentEditingCell: state.rowLength -1
           }
         : state.defaultMatrixTemplate[state.currentRow][
             state.currentEditingCell

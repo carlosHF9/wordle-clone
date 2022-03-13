@@ -6,7 +6,7 @@ import "./styles.css";
 const lettersRowStyle = {
   baseStyle: {
     display: "flex",
-    gap: "5px",
+    gap: "10px",
     margin: "0 auto"
   }
 };

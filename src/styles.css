@@ -1,10 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@300&family=Luckiest+Guy&display=swap');
 
 .App {
   display: flex;
   flex-direction: column;
   gap: 10px;
   font-family: sans-serif;
-  text-align: center;
-  font-family: "Averia Sans Libre", cursive;
+  
+  font-family: 'Luckiest Guy', cursive;
+  max-width: 500px;
+  margin: 0 auto;
 }
