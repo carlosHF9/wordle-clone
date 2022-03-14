@@ -76,7 +76,8 @@ export default function App() {
     <GlobalContext.Provider
       value={{
         dispatch,
-        state
+        state,
+        TryToGuess
       }}
     >
       {!state.isGameOver.status ? (
@@ -84,16 +85,15 @@ export default function App() {
           className="App"
 
         >
-          <h2>Find out the secret word</h2>
+          <h2 className="app-title">Deduletras!</h2>
           {state.defaultMatrixTemplate.map((row, index) => (
             <LettersRow validatedArray={state.currentValidatedArray} rowIndex={index} row={row} />
           ))}
-          <Button onClick={TryToGuess}>Try</Button>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
            justifyContent: 'center',
-           gap: '20px',
+           gap: '10px',
            width: '100%'
           }}>
             {

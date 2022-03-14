@@ -1,3 +1,7 @@
+import { Delete } from "react-feather";
+
+
+
 export default {
   secretWord: "andar",
   shouldGiveTip: false,
@@ -44,13 +48,15 @@ export default {
       {value: 'l', status: 'neutral'}
     ],
     [
+      {value: 'Enter', status: 'neutral', key: 'Enter'},
       {value: 'z', status: 'neutral'},
       {value: 'x', status: 'neutral'},
       {value: 'c', status: 'neutral'},
       {value: 'v', status: 'neutral'},
       {value: 'b', status: 'neutral'},
       {value: 'n', status: 'neutral'},
-      {value: 'm', status: 'neutral'}
+      {value: 'm', status: 'neutral'},
+      {value: <Delete />, status: 'neutral', key: 'Backspace' }
     ]
   ]
 };

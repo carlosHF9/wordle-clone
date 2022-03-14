@@ -9,9 +9,10 @@ const letterStyleState = {
     justifyContent: 'center',
     height: "37px",
     width: "37px",
-    border: "1px solid black",
+    border: "2px solid black",
     fontSize: "1.7rem",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
+    borderRadius: '3px'
   },
   isWrong: {
     backgroundColor: "red",
