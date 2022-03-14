@@ -3,9 +3,9 @@ const baseStyle = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    border: '2px solid black',
+    border: 'none',
     flex: '1',
-    padding: '.5rem 0rem',
+    padding: '.8rem 0rem',
     borderRadius: '3px'
 }
 

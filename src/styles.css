@@ -2,11 +2,12 @@
 
 .App {
   display: flex;
+  height: 97vh;
   flex-direction: column;
   gap: 10px;
   font-family: 'Averia Sans Libre', cursive;
   font-weight: bold;
-  font-size: .8rem;
+  font-size: 1rem;
   max-width: 500px;
   text-align: center;
   margin: 0 auto;

@@ -91,10 +91,13 @@ export default function App() {
           ))}
           <div style={{
             display: 'flex',
+            alignSelf: 'flex-end',
             flexDirection: 'column',
            justifyContent: 'center',
            gap: '10px',
-           width: '100%'
+           width: '100%',
+           marginTop: 'auto'
+           
           }}>
             {
               state.keyboard.map( row => (

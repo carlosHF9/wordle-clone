@@ -12,7 +12,7 @@ const letterStyleState = {
     border: "2px solid black",
     fontSize: "1.7rem",
     textTransform: "uppercase",
-    borderRadius: '3px'
+    borderRadius: '20px'
   },
   isWrong: {
     backgroundColor: "red",
