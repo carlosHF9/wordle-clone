@@ -16,6 +16,7 @@ export default function ValidateWord(word, tryArray) {
         if(letter === splitedWord[index]) {
             wordsRepetition[letter] -= 1
             validatedArray.push({value: letter, letterStatus: 'isRight'})
+            
         }
 
         else {
@@ -53,6 +54,3 @@ export default function ValidateWord(word, tryArray) {
     return validatedArray
 
 }
-
-
-console.log(ValidateWord('carlos', ['c', 'a', 'r', 'l', 'a', 's']))

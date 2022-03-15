@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { GlobalContext } from "../../App";
 import "./letterinput.css";
 
-const letterStyleState = {
+export const letterStyleState = {
   baseStyle: {
     display: 'flex',
     alignItems: 'center',

@@ -2,7 +2,11 @@ import ValidateWord from "./validateWord";
 
 
 export default function AppReducer(state, action) {
+
+
+
   switch (action.type) {
+
     case "SET_INPUTVALUE":
       return {
         ...state,
@@ -35,6 +39,27 @@ export default function AppReducer(state, action) {
             currentValidatedArray: [...state.currentValidatedArray, ValidateWord(state.secretWord, state.defaultMatrixTemplate[state.currentRow])]
             
           };
+
+    
+    case 'TRACK_LETTERSTATE':
+      
+      let updatedLetterKeyboardStatus = {...state.letterKeyboardStatus}
+      
+      state.currentValidatedArray[state.currentRow - 1].map( (letter, index) => {
+        if(!updatedLetterKeyboardStatus[letter.value]) {
+          updatedLetterKeyboardStatus[letter.value] = letter.letterStatus
+        }
+
+        else {
+          if(updatedLetterKeyboardStatus[letter.value] === 'isInAnotherPosition' && letter.letterStatus === 'isRight') {
+            updatedLetterKeyboardStatus[letter.value] = letter.letterStatus
+          }
+        }
+      })
+      
+
+      
+      return {...state, letterKeyboardStatus: updatedLetterKeyboardStatus}
 
     case "SET_CURRENTFIELD":
       return {

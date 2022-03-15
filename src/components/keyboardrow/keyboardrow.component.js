@@ -27,7 +27,11 @@ export default function KeyboardRow({keyboardRow}) {
     return (
         <div style={{display: 'flex', gap: '5px', justifyContent: "center", width: '100%'}}>
             {keyboardRow.map( letter => (
-                <Letter value={letter.value} onClick={() =>InsertValueFromKeyboard(letter.key, letter.value )} />
+                <Letter
+                    status={ !letter.key ? state.letterKeyboardStatus[letter.value] : ''} 
+                    value={letter.value} 
+                    onClick={() =>InsertValueFromKeyboard(letter.key, letter.value )} 
+                />
             ))}
         </div>
     )

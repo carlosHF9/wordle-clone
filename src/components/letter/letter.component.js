@@ -1,3 +1,5 @@
+import { letterStyleState } from "../letterinput/letterinput.component"
+
 
 const baseStyle = {
     display: 'flex',
@@ -10,14 +12,9 @@ const baseStyle = {
 }
 
 
-export default function Letter({children, value, onClick}) {
-
-
-
-
-    
+export default function Letter({children, value, onClick, status}) {
 
     return (
-        <div style={baseStyle} onClick={() => onClick(value)}>{value}</div>
+        <div style={{...baseStyle, ...letterStyleState[status]}} onClick={() => onClick(value)}>{value}</div>
     )
 }

@@ -3,15 +3,17 @@ import { useReducer, createContext, useEffect } from "react";
 import InitialState from "./app.initialstate";
 import AppReducer from "./app.reducer";
 import LettersRow from "./components/row/lettersrow.component";
-import Button from "./components/button/button.component";
 import KeyboardRow from "./components/keyboardrow/keyboardrow.component";
+import keyboarskeys from "./keyboarskeys";
 
 
 export const GlobalContext = createContext();
 
 export default function App() {
-  const [state, dispatch] = useReducer(AppReducer, InitialState);
 
+  
+
+  const [state, dispatch] = useReducer(AppReducer, JSON.parse(localStorage.getItem('deduletras')) ||InitialState);
   function TryToGuess() {
     if (state.defaultMatrixTemplate[state.currentRow].includes("")) {
       dispatch({ type: "START_SHAKING" });
@@ -21,11 +23,22 @@ export default function App() {
       }, 1100);
     } else {
       dispatch({ type: "CONFIRM_GUESS" });
+      dispatch({type: 'TRACK_LETTERSTATE'});
     }
   }
 
+
   useEffect(() => {
-    console.log('fired')
+    console.log(state.letterKeyboardStatus)
+  }, [state.letterKeyboardStatus])
+
+  useEffect(() => { 
+    localStorage.setItem('deduletras', JSON.stringify({...state}))
+    
+  }, [state]) 
+  
+
+  useEffect(() => {
 
     var regex = /[a-zA-Z\u00C0-\u00FF ]+/i;
     document.addEventListener("keyup", (e) => {
@@ -72,6 +85,8 @@ export default function App() {
     });
   }, []);
 
+  
+
   return (
     <GlobalContext.Provider
       value={{
@@ -89,6 +104,7 @@ export default function App() {
           {state.defaultMatrixTemplate.map((row, index) => (
             <LettersRow validatedArray={state.currentValidatedArray} rowIndex={index} row={row} />
           ))}
+          
           <div style={{
             display: 'flex',
             alignSelf: 'flex-end',
@@ -100,7 +116,8 @@ export default function App() {
            
           }}>
             {
-              state.keyboard.map( row => (
+              
+              keyboarskeys.map( row => (
                 <KeyboardRow keyboardRow={row}/>
               ))
             }
