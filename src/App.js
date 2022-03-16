@@ -5,6 +5,8 @@ import AppReducer from "./app.reducer";
 import LettersRow from "./components/row/lettersrow.component";
 import KeyboardRow from "./components/keyboardrow/keyboardrow.component";
 import keyboarskeys from "./keyboarskeys";
+import Modal from "./components/modal/modal.component";
+import Button from "./components/button/button.component";
 
 
 export const GlobalContext = createContext();
@@ -13,7 +15,17 @@ export default function App() {
 
   
 
+  
+
   const [state, dispatch] = useReducer(AppReducer, JSON.parse(localStorage.getItem('deduletras')) ||InitialState);
+
+
+  function Reset() {
+
+    localStorage.removeItem('deduletras')
+    window.location.reload()
+  }
+
   function TryToGuess() {
     if (state.defaultMatrixTemplate[state.currentRow].includes("")) {
       dispatch({ type: "START_SHAKING" });
@@ -26,11 +38,6 @@ export default function App() {
       dispatch({type: 'TRACK_LETTERSTATE'});
     }
   }
-
-
-  useEffect(() => {
-    console.log(state.letterKeyboardStatus)
-  }, [state.letterKeyboardStatus])
 
   useEffect(() => { 
     localStorage.setItem('deduletras', JSON.stringify({...state}))
@@ -47,6 +54,8 @@ export default function App() {
           type: "SET_CURRENTFIELDVALUE",
           newValue: e.key
         });
+
+        
 
         dispatch({
           type: "NEXT_FIELD"
@@ -65,22 +74,6 @@ export default function App() {
         if(e.key === "ArrowLeft" ) {
           dispatch({ type: "PREVIOUS_FIELD", keyType: "ArrowLeft" });
         }
-        // switch (e.key) {
-        //   case "Backspace":
-        //     dispatch({ type: "DELETE_VALUE" });
-
-        
-        //   case "ArrowRight": 
-        //     dispatch({type: "NEXT_FIELD", keyType: "ArrowRight"});
-
-        //   case "ArrowLeft":
-        //     dispatch({ type: "PREVIOUS_FIELD", keyType: "ArrowLeft" });
-
-
-          
-        //   default:
-        //     return;
-        // }
       }
     });
   }, []);
@@ -95,39 +88,40 @@ export default function App() {
         TryToGuess
       }}
     >
-      {!state.isGameOver.status ? (
-        <div
-          className="App"
+      
+      <div
+        className="App"
 
-        >
-          <h2 className="app-title">Deduletras!</h2>
-          {state.defaultMatrixTemplate.map((row, index) => (
-            <LettersRow validatedArray={state.currentValidatedArray} rowIndex={index} row={row} />
-          ))}
+      >
+        <Modal name="isResultModalOpend">
+          <h2>Você {state.isGameOver.win ? 'Ganhou' : 'Perdeu'}!</h2>
+        </Modal>
+        <h2 className="app-title">Deduletras!</h2>
+        {state.defaultMatrixTemplate.map((row, index) => (
+          <LettersRow validatedArray={state.currentValidatedArray} rowIndex={index} row={row} />
+        ))}
+        
+        <div style={{
+          display: 'flex',
+          alignSelf: 'flex-end',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          gap: '10px',
+          width: '100%',
+          marginTop: 'auto'
           
-          <div style={{
-            display: 'flex',
-            alignSelf: 'flex-end',
-            flexDirection: 'column',
-           justifyContent: 'center',
-           gap: '10px',
-           width: '100%',
-           marginTop: 'auto'
-           
-          }}>
-            {
-              
-              keyboarskeys.map( row => (
-                <KeyboardRow keyboardRow={row}/>
-              ))
-            }
-          </div>
+        }}>
+          <Button onClick={Reset}>
+            Reset
+          </Button>
+          {
+            
+            keyboarskeys.map( row => (
+              <KeyboardRow keyboardRow={row}/>
+            ))
+          }
         </div>
-      ) : state.isGameOver.win ? (
-        <h1>You win</h1>
-      ) : (
-        <h1>You lose</h1>
-      )}
+      </div>
     </GlobalContext.Provider>
   );
 }

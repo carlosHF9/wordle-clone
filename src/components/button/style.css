@@ -1,9 +1,14 @@
 .button {
   font-family: "Averia Sans Libre", cursive;
+  font-size: .8rem !important; 
   align-self: center;
-  padding: 0.6rem 3.5rem;
-  background-color: white;
+  padding: 0.6rem 2rem;
+  color: white;
+  background-color: green;
   border: 1px solid black;
   border-radius: 3px;
   font-size: 1.2rem;
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }

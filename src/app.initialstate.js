@@ -15,6 +15,7 @@ export default {
     status: false,
     win: false
   },
+  isResultModalOpend: false,
   letterKeyboardStatus: {},
   defaultMatrixTemplate: [
     ["", "", "", "", ""],

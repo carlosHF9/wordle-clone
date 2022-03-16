@@ -8,7 +8,7 @@ export default function AppReducer(state, action) {
   switch (action.type) {
 
     case "SET_INPUTVALUE":
-      return {
+      return state.isGameOver.status ? {...state} : {
         ...state,
         defaultMatrixTemplate: state.defaultMatrixTemplate.map((row, index) =>
           index !== action.rowIndex
@@ -27,10 +27,23 @@ export default function AppReducer(state, action) {
             isGameOver: {
               status: true,
               win: true
-            }
+            },
+            isResultModalOpend: true,
+            verifiedRows: [...state.verifiedRows, state.currentRow],
+            currentRow: state.currentRow +1,
+            currentValidatedArray: [...state.currentValidatedArray, ValidateWord(state.secretWord, state.defaultMatrixTemplate[state.currentRow])]
           }
         : state.currentRow === state.defaultMatrixTemplate.length - 1
-        ? { ...state, isGameOver: { status: true, win: false } }
+        ? { 
+
+            ...state,
+            isResultModalOpend: true,
+            isGameOver: { status: true, win: false },
+            currentValidatedArray: [...state.currentValidatedArray, 
+            ValidateWord(state.secretWord, state.defaultMatrixTemplate[state.currentRow])],
+            currentRow: state.currentRow + 1,
+            verifiedRows: [...state.verifiedRows, state.currentRow]
+          }
         : {
             ...state,
             currentRow: state.currentRow + 1,
@@ -62,13 +75,13 @@ export default function AppReducer(state, action) {
       return {...state, letterKeyboardStatus: updatedLetterKeyboardStatus}
 
     case "SET_CURRENTFIELD":
-      return {
+      return state.isGameOver.status ? {...state} : {
         ...state,
         currentEditingCell: action.newIndexCell
       };
 
     case "SET_CURRENTFIELDVALUE":
-      return {
+      return state.isGameOver.status ? {...state} :  {
         ...state,
 
         defaultMatrixTemplate: state.defaultMatrixTemplate.map(
@@ -86,7 +99,7 @@ export default function AppReducer(state, action) {
 
       
      
-      return {
+      return state.isGameOver.status ? {...state} : {
         ...state,
         currentEditingCell:
           state.currentEditingCell === state.rowLength
@@ -98,7 +111,7 @@ export default function AppReducer(state, action) {
 
       
       
-      return {
+      return state.isGameOver.status ? {...state} : {
         ...state,
         currentEditingCell: state.currentEditingCell === 0 ? 0 : state.currentEditingCell -1
         
@@ -107,7 +120,7 @@ export default function AppReducer(state, action) {
     case "DELETE_VALUE":
 
     
-      return state.currentEditingCell === state.rowLength
+      return state.isGameOver.status ? {...state} : state.currentEditingCell === state.rowLength
         ? {
             ...state,
             currentEditingCell: state.rowLength -1
@@ -141,10 +154,13 @@ export default function AppReducer(state, action) {
           };
 
     case "START_SHAKING":
-      return { ...state, rowIsShaking: true };
+      return state.isGameOver.status ? {...state} : { ...state, rowIsShaking: true };
 
     case "STOP_SHAKING":
-      return { ...state, rowIsShaking: false };
+      return state.isGameOver.status ? {...state} : { ...state, rowIsShaking: false };
+
+    case "CLOSE_MODAL":
+      return {...state, [action.modalName]: false}
     default:
       return;
   }

@@ -1,0 +1,34 @@
+.modal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    animation-name: background-transition;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    
+}
+
+.modal-dialog-box {
+    background-color: white;
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: 5px;
+
+}
+
+@keyframes background-transition {
+
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+}
