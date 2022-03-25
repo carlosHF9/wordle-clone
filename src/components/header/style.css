@@ -1,0 +1,29 @@
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.bar-chart {
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+.app-title {
+    
+}
+
+.left-settings {
+    padding-right: 2.5rem;
+}

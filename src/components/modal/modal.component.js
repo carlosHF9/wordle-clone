@@ -1,6 +1,9 @@
 import { useContext } from "react"
+import { X } from "react-feather"
 import { GlobalContext } from "../../App"
 import './style.css'
+
+
 
 
 export default function Modal({ children, name}) {
@@ -13,8 +16,13 @@ export default function Modal({ children, name}) {
 
     if(state[name]) {
         return (
-            <div className="modal-container" onClick={() => CloseModal()}>
+            <div className="modal-container"  onClick={ (e) => {
+                if(e.target.className === 'modal-container') {
+                    CloseModal()
+                }
+            }} >
                 <div className="modal-dialog-box">
+                    <X className="close-button" onClick={ () => CloseModal()}/>
                     {children}
                 </div>
             </div>

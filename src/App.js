@@ -7,6 +7,10 @@ import KeyboardRow from "./components/keyboardrow/keyboardrow.component";
 import keyboarskeys from "./keyboarskeys";
 import Modal from "./components/modal/modal.component";
 import Button from "./components/button/button.component";
+import Header from "./components/header/header.component";
+import Instructions from "./components/instructions/instructions.component";
+import Statistics from "./components/statistics/statistics.component";
+
 
 
 export const GlobalContext = createContext();
@@ -42,11 +46,14 @@ export default function App() {
   useEffect(() => { 
     localStorage.setItem('deduletras', JSON.stringify({...state}))
     
-  }, [state]) 
+  }, [state])
+  
+  
+
+  
   
 
   useEffect(() => {
-
     var regex = /[a-zA-Z\u00C0-\u00FF ]+/i;
     document.addEventListener("keyup", (e) => {
       if (regex.test(e.key) && e.key.length === 1 && e.key !== " ") {
@@ -55,12 +62,11 @@ export default function App() {
           newValue: e.key
         });
 
-        
-
         dispatch({
           type: "NEXT_FIELD"
         })
       } else {
+        dispatch({type: 'CURRENT_KEY', value: e.key})
 
         if(e.key === 'Backspace') {
           dispatch({ type: "DELETE_VALUE" });
@@ -76,8 +82,17 @@ export default function App() {
         }
       }
     });
+    
   }, []);
 
+  useEffect( () => {
+    if(state.currentKey === 'Enter') {
+      TryToGuess()
+      dispatch({type: 'CURRENT_KEY', value: ''})
+    }  
+  } ,[
+    state
+  ])
   
 
   return (
@@ -93,13 +108,22 @@ export default function App() {
         className="App"
 
       >
+        <Header />
+        <Modal name="isStatisticsOpend">
+          <Statistics />
+        </Modal>
+        <Modal name="isInstructionModalOpend">
+          <Instructions />
+        </Modal>
         <Modal name="isResultModalOpend">
           <h2>Você {state.isGameOver.win ? 'Ganhou' : 'Perdeu'}!</h2>
         </Modal>
-        <h2 className="app-title">Deduletras!</h2>
-        {state.defaultMatrixTemplate.map((row, index) => (
-          <LettersRow validatedArray={state.currentValidatedArray} rowIndex={index} row={row} />
-        ))}
+        <div className="matrix">
+          {state.defaultMatrixTemplate.map((row, index) => (
+            <LettersRow validatedArray={state.currentValidatedArray} rowIndex={index} row={row} />
+          ))}
+        </div>
+        
         
         <div style={{
           display: 'flex',
@@ -111,9 +135,9 @@ export default function App() {
           marginTop: 'auto'
           
         }}>
-          <Button onClick={Reset}>
+          {/* <Button onClick={Reset}>
             Reset
-          </Button>
+          </Button> */}
           {
             
             keyboarskeys.map( row => (

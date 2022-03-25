@@ -11,6 +11,14 @@
   max-width: 500px;
   text-align: center;
   margin: 0 auto;
+
+}
+
+.matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 80px;
 }
 
 

@@ -2,9 +2,6 @@ import ValidateWord from "./validateWord";
 
 
 export default function AppReducer(state, action) {
-
-
-
   switch (action.type) {
 
     case "SET_INPUTVALUE":
@@ -161,6 +158,15 @@ export default function AppReducer(state, action) {
 
     case "CLOSE_MODAL":
       return {...state, [action.modalName]: false}
+
+    case "OPEN_MODAL":
+      return {...state, [action.modalName]: true}
+
+
+    case "CURRENT_KEY":
+    
+
+      return {...state, currentKey: action.value}
     default:
       return;
   }

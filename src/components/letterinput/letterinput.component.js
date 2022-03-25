@@ -40,11 +40,12 @@ export default function LetterInput({
   index,
   readOnly,
   cellIndex,
-  rowIndex
+  rowIndex,
+  forInstructions
 }) {
   const { dispatch, state } = useContext(GlobalContext);
 
-  return (
+  return (forInstructions ? 
     <div
       onClick={() => {
         dispatch({
@@ -63,6 +64,13 @@ export default function LetterInput({
           ? "disabled"
           : ""
       }
+    >
+      <p>{value}</p>
+    </div> : <div
+      style={{
+        ...letterStyleState[letterStatus],
+        ...letterStyleState.baseStyle
+      }}
     >
       <p>{value}</p>
     </div>
